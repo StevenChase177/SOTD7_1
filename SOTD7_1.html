@@ -4,9 +4,46 @@
         Script of the day week 7 number 2
     </title>
     <body>
-        
+        <p> please enter your grocery list items here one at a time. When you are done please type DONE to see your list</p>
+        <input id="groceryListInput" type="text">
+        <br>
+        <button onclick="submitItem()">submit</button> 
     </body>
     <script>
-        
+        // empty array, will hold users input
+        let groceryItems = []
+        function submitItem(){
+
+            newItem = document.getElementById("groceryListInput").value
+            // clears the input tag of the users input
+            clearGroceryListInput()
+
+            if(newItem == 'DONE'){
+                // if the user is done sorts the list then call the function to display the contents of groceryList array
+                   groceryItems = groceryItems.sort()
+                   displayGroceryList(groceryItems)
+            }else{
+                // addes users input to the groceryItems arry
+                groceryItems.push(newItem) 
+            }           
+        }
+        // clears the input tag of the users input
+        function clearGroceryListInput(){
+            document.getElementById("groceryListInput").value = ''
+        }
+        function displayGroceryList(array){
+            let groceryListItem = ""
+            for( i in array){
+                // addes each index in the array to the groceryList item string
+                // each item is srounded by li tags because it is being added to an unorderled list.
+                // this is ul will be written to the document
+               groceryListItem = groceryListItem + `<li> ${array[i]} </li>`
+            }
+            document.write(`
+                <p> you list has ${array.length} items in it
+                <ul>
+                    ${groceryListItem}
+                </ul>`)
+        }
     </script>
 </html>
